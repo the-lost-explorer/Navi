@@ -2,22 +2,13 @@ package com.semicolonlabs.navi;
 
 import org.json.JSONObject;
 
+import java.util.List;
+
 public interface ActivityCallback {
     /**
      * callback for getting predictions
-     *
-     * @return: jsonObject
-     * {
-     * "data": [
-     *  [
-     *      "place1", "place2", ...
-     *  ],
-     *  [
-     *      "id1", "id2", ...
-     *  ],
-     * ]}
      */
-    void onPredictions(JSONObject jsonObject);
+    void onPredictions(List<String> places, List<String> place_ids);
 
     /**
      * callback for getting routes

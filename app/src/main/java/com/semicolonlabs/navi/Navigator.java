@@ -126,8 +126,6 @@ class Navigator {
 
             if (this.taskCode == Navigator.PLACES_TASK) {
                 // get description, place_id
-                JSONObject data = new JSONObject();
-                JSONArray results = new JSONArray();
                 List<String> places = new ArrayList<>();
                 List<String> place_ids = new ArrayList<>();
                 if (jsonObject == null)
@@ -139,13 +137,11 @@ class Navigator {
                         place_ids.add(prediction.getJSONObject(i).getString("place_id"));
                         Log.d(TAG, "got place: " + places.get(i));
                     }
-                    results.put(places);
-                    results.put(place_ids);
-                    data.put("data", results);
+
                 } catch (Exception e) {
                     Log.d(TAG, this.getClass().getName() + this.taskCode);
                 }
-                Navigator.this.listener.onPredictions(data);
+                Navigator.this.listener.onPredictions(places, place_ids);
             } else {
                 Navigator.this.listener.onRoutes(jsonObject);
             }
