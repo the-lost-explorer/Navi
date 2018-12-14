@@ -12,6 +12,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import okhttp3.OkHttpClient;
@@ -126,17 +128,19 @@ class Navigator {
                 // get description, place_id
                 JSONObject data = new JSONObject();
                 JSONArray results = new JSONArray();
+                List<String> places = new ArrayList<>();
+                List<String> place_ids = new ArrayList<>();
                 if (jsonObject == null)
                     return;
                 try {
                     JSONArray prediction = jsonObject.getJSONArray("predictions");
                     for (int i = 0; i < prediction.length() && i < MAX_PLACES_LENGTH; i++) {
-                        JSONObject result = new JSONObject();
-                        result.put("name", ((JSONObject) prediction.get(i)).getString("description"));
-                        result.put("id", ((JSONObject) prediction.get(i)).getString("place_id"));
-                        Log.d(TAG, "got place: " + result.toString());
-                        results.put(result);
+                        places.add(prediction.getJSONObject(i).getString("description"));
+                        place_ids.add(prediction.getJSONObject(i).getString("place_id"));
+                        Log.d(TAG, "got place: " + places.get(i));
                     }
+                    results.put(places);
+                    results.put(place_ids);
                     data.put("data", results);
                 } catch (Exception e) {
                     Log.d(TAG, this.getClass().getName() + this.taskCode);

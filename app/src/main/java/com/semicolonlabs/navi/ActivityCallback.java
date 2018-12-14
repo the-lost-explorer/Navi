@@ -10,12 +10,10 @@ public interface ActivityCallback {
      * {
      * "data": [
      *  [
-     *      "name": "place1",
-     *      "id": "id1"
+     *      "place1", "place2", ...
      *  ],
      *  [
-     *      "name": "place2",
-     *      "id": "id2"
+     *      "id1", "id2", ...
      *  ],
      * ]}
      */
